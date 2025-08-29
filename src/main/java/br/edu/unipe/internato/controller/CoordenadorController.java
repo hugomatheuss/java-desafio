@@ -39,11 +39,11 @@ public class CoordenadorController {
                                                             @RequestBody Coordenador atualizado) {
         return coordenadorRepository.findById(id)
                 .map(c -> {
-                    if (c.getNome() != null) {
+                    if (atualizado.getNome() != null) {
                         c.setNome(atualizado.getNome());
                     }
 
-                    if (c.getEmail() != null) {
+                    if (atualizado.getEmail() != null) {
                         c.setEmail(atualizado.getEmail());
                     }
 
