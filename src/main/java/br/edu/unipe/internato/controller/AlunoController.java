@@ -40,7 +40,7 @@ public class AlunoController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Aluno> buscarAluno(@PathVariable Long id) {
+  public ResponseEntity<Aluno> buscarAluno(@PathVariable("id") Long id) {
       return alunoRepository.findById(id)
               .map(ResponseEntity::ok)
               .orElse(ResponseEntity.notFound().build());
@@ -52,18 +52,23 @@ public class AlunoController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Aluno> atualizarAluno(@PathVariable Long id, @RequestBody Aluno alunoAtualizado) {
+  public ResponseEntity<Aluno> atualizarAluno(@PathVariable("id") Long id, @RequestBody Aluno alunoAtualizado) {
       return alunoRepository.findById(id)
               .map(aluno -> {
-                  aluno.setNome(alunoAtualizado.getNome());
-                  aluno.setPeriodo(alunoAtualizado.getPeriodo());
-                  return ResponseEntity.ok(alunoRepository.save(aluno));
-              })
-              .orElse(ResponseEntity.notFound().build());
+                if (alunoAtualizado.getNome() != null) {
+                    aluno.setNome(alunoAtualizado.getNome());
+                }
+
+                if (alunoAtualizado.getPeriodo() != null) {
+                    aluno.setPeriodo(alunoAtualizado.getPeriodo());
+                }
+                return ResponseEntity.ok(alunoRepository.save(aluno));
+            })
+            .orElse(ResponseEntity.notFound().build());
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deletarAluno(@PathVariable Long id) {
+  public ResponseEntity<Void> deletarAluno(@PathVariable("id") Long id) {
       return alunoRepository.findById(id)
               .map(aluno -> {
                   alunoRepository.delete(aluno);
@@ -73,8 +78,8 @@ public class AlunoController {
   }
 
   @PostMapping("/{alunoId}/alocar/{plantaoId}")
-  public ResponseEntity<?> alocarPlantao(@PathVariable Long alunoId,
-                                                      @PathVariable Long plantaoId) {
+  public ResponseEntity<?> alocarPlantao(@PathVariable("alunoId") Long alunoId,
+                                                      @PathVariable("plantaoId") Long plantaoId) {
 
       Aluno aluno = alunoRepository.findById(alunoId).orElse(null);
       Plantao plantao = plantaoRepository.findById(plantaoId).orElse(null);
