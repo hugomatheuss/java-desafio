@@ -3,6 +3,7 @@ package br.edu.unipe.internato.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Table(name = "plantoes")
@@ -16,11 +17,22 @@ public class Plantao {
     private LocalTime inicio;
     private LocalTime fim;
 
-    private Long localId;
-    private Long especialidadeId;
-    private Long preceptorId;
-
     private int vagas;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "local_id", nullable = false)
+    private Local local;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "especialidade_id", nullable = false)
+    private Especialidade especialidade;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "preceptor_id")
+    private Preceptor preceptor;
+
+    @OneToMany(mappedBy = "plantao", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AlocacaoAluno> alocacoes;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -34,15 +46,18 @@ public class Plantao {
     public LocalTime getFim() { return fim; }
     public void setFim(LocalTime fim) { this.fim = fim; }
 
-    public Long getLocalId() { return localId; }
-    public void setLocalId(Long localId) { this.localId = localId; }
-
-    public Long getEspecialidadeId() { return especialidadeId; }
-    public void setEspecialidadeId(Long especialidadeId) { this.especialidadeId = especialidadeId; }
-
-    public Long getPreceptorId() { return preceptorId; }
-    public void setPreceptorId(Long preceptorId) { this.preceptorId = preceptorId; }
-
     public int getVagas() { return vagas; }
     public void setVagas(int vagas) { this.vagas = vagas; }
+
+    public Local getLocal() { return local; }
+    public void setLocal(Local local) { this.local = local; }
+
+    public Especialidade getEspecialidade() { return especialidade; }
+    public void setEspecialidade(Especialidade especialidade) { this.especialidade = especialidade; }
+
+    public Preceptor getPreceptor() { return preceptor; }
+    public void setPreceptor(Preceptor preceptor) { this.preceptor = preceptor; }
+
+    public List<AlocacaoAluno> getAlocacoes() { return alocacoes; }
+    public void setAlocacoes(List<AlocacaoAluno> alocacoes) { this.alocacoes = alocacoes; }
 }

@@ -10,15 +10,20 @@ public class AlocacaoAluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long alunoId;
-    private Long plantaoId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "aluno_id", nullable = false)
+    private Aluno aluno;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plantao_id", nullable = false)
+    private Plantao plantao;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Long getAlunoId() { return alunoId; }
-    public void setAlunoId(Long alunoId) { this.alunoId = alunoId; }
+    public Aluno getAluno() { return aluno; }
+    public void setAluno(Aluno aluno) { this.aluno = aluno; }
 
-    public Long getPlantaoId() { return plantaoId; }
-    public void setPlantaoId(Long plantaoId) { this.plantaoId = plantaoId; }
+    public Plantao getPlantao() { return plantao; }
+    public void setPlantao(Plantao plantao) { this.plantao = plantao; }
 }
