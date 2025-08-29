@@ -73,7 +73,7 @@ public class AlunoController {
   }
 
   @PostMapping("/{alunoId}/alocar/{plantaoId}")
-  public ResponseEntity<AlocacaoAluno> alocarPlantao(@PathVariable Long alunoId,
+  public ResponseEntity<?> alocarPlantao(@PathVariable Long alunoId,
                                                       @PathVariable Long plantaoId) {
 
       Aluno aluno = alunoRepository.findById(alunoId).orElse(null);
