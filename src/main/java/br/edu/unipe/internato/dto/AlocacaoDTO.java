@@ -1,8 +1,13 @@
 package br.edu.unipe.internato.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class AlocacaoDTO {
 
+    @NotNull
     private Long alunoId;
+
+    @NotNull
     private Long plantaoId;
 
     public AlocacaoDTO() {}

@@ -1,7 +1,10 @@
 package br.edu.unipe.internato.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class EspecialidadeDTO {
 
+    @NotBlank(message = "Nome da especialidade é obrigatório")
     private String nome;
 
     public EspecialidadeDTO() {}

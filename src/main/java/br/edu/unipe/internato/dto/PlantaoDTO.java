@@ -2,13 +2,23 @@ package br.edu.unipe.internato.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import jakarta.validation.constraints.NotNull;
 
 public class PlantaoDTO {
 
+    @NotNull
     private LocalDate data;
+
+    @NotNull
     private LocalTime inicio;
+
+    @NotNull
     private LocalTime fim;
+
+    @NotNull
     private Long localId;
+
+    @NotNull
     private Long especialidadeId;
 
     public LocalDate getData() { return data; }

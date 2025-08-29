@@ -1,6 +1,7 @@
 package br.edu.unipe.internato.model;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,10 +12,11 @@ public class Especialidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
     @OneToMany(mappedBy = "especialidade", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Plantao> plantoes;
+    private List<Plantao> plantoes = new ArrayList<>();
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

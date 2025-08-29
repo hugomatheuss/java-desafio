@@ -1,10 +1,17 @@
 package br.edu.unipe.internato.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LocalDTO {
 
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
-    private String cidade;
+
+    @NotBlank(message = "Endereço é obrigatório")
     private String endereco;
+
+    @NotBlank(message = "Cidade é obrigatória")
+    private String cidade;
 
     public LocalDTO() {}
 

@@ -3,6 +3,7 @@ package br.edu.unipe.internato.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,10 +14,16 @@ public class Plantao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private LocalDate data;
+
+    @Column(nullable = false)
     private LocalTime inicio;
+
+    @Column(nullable = false)
     private LocalTime fim;
 
+    @Column(nullable = false)
     private int vagas;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,7 +39,7 @@ public class Plantao {
     private Preceptor preceptor;
 
     @OneToMany(mappedBy = "plantao", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AlocacaoAluno> alocacoes;
+    private List<AlocacaoAluno> alocacoes = new ArrayList<>();
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

@@ -1,10 +1,14 @@
 package br.edu.unipe.internato.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class AlunoDTO {
 
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
-    private String periodo; // P9, P10, etc.
 
+    @NotBlank(message = "Período é obrigatório")
+    private String periodo;
     public AlunoDTO() {}
 
     public AlunoDTO(String nome, String periodo) {
@@ -12,7 +16,6 @@ public class AlunoDTO {
         this.periodo = periodo;
     }
 
-    // getters e setters
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 

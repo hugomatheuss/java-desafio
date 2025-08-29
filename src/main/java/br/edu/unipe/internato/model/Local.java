@@ -1,6 +1,7 @@
 package br.edu.unipe.internato.model;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,16 +12,24 @@ public class Local {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
     private String sigla;
+
+    @Column(nullable = false)
     private String endereco;
+
     private String cep;
+
+    @Column(nullable = false)
     private String cidade;
+
     private Double latitude;
     private Double longitude;
 
     @OneToMany(mappedBy = "local", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Plantao> plantoes;
+    private List<Plantao> plantoes = new ArrayList<>();
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
